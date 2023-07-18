@@ -12,7 +12,7 @@ views = Blueprint('views', __name__)
 @views.route('/',methods= ['GET', 'POST'])
 def home():
     if request.method == 'POST' and 'first' in request.form:
-        t = TeleBot(token= '6045365738:AAFJXULGdym7748jtVk5ksrgdDfGVoJeEeM')
+        t = TeleBot(token= os.getenv(teleapi))
         n= os.getenv('sudip')
         print(n)
         
