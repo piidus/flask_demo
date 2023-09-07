@@ -7,7 +7,7 @@ import os
 # from .icici_login import api_login
 try:
     from memory_profiler import profile
-    from website import calculation
+    from website import result
     
     import psutil
 except Exception as e:
@@ -21,9 +21,9 @@ def test():
     if request.method == 'POST':
         cal1 = int(request.form.get('cal1'))
         cal2 = int(request.form.get('cal2'))
-        result = calculation.add(cal1, cal2)
-        print(result)
-        print(calculation.second.sub(cal1, cal2))
+        result1 = result.add_result(cal1, cal2)
+        print(result1)
+        print(result.rel1.sub_result(cal1, cal2))
     
         # Get the memory usage of the current process
     # memory_info = psutil.virtual_memory()
