@@ -16,9 +16,21 @@
           <input type="number" class="form-control" name="cal2" >
           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         <!-- </div> -->
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" name="calculated">Submit</button>
       </form>
     </div>
+    <table class="table">
+      {% for t in data.test %}
+      <tr>
+      <form action="/home" method="post">
+      <td width="10"><input name="uni_id" value="{{t.uid}}"></td>
+      <td>{{t.status}}</td>
+      <td><button type="submit" name="stop">Stop</button></td>
+      <td><button type="submit" name="delete">Del</button></td>
+    </tr>
+    </form>
+      {% endfor %}
+    </table>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>
