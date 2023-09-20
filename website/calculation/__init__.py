@@ -1,5 +1,5 @@
-__all__ =['add', 'sub', 'DatabaseOperation']
+__all__ =['add', 'sub', 'sample_save']
 
-from .first import add
+from .first import add, sample_save
 from .second import sub
-from .db_class import DatabaseOperation
+# from .db_class import DatabaseOperation

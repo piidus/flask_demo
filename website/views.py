@@ -1,20 +1,21 @@
-from flask import Blueprint, render_template, request, flash, jsonify, session
+from flask import Blueprint, render_template, request, flash, jsonify, session, current_app
 from telebot import TeleBot
 from . import db
 import datetime
 import os, uuid
 # from .telebot import message
 # from .icici_login import api_login
-from .models import Test
+from .models import Test, Stock
 try:
     from memory_profiler import profile
     from website import result
-    from website.result import first_test, FirstTest
+    from website.result import FirstTest, first_func
     
     import psutil
 except Exception as e:
     print('Error in calculation  ::', e)
 views = Blueprint('views', __name__)
+
 
 
 @profile
@@ -25,29 +26,28 @@ def test():
         cal1 = int(request.form.get('cal1'))
         cal2 = int(request.form.get('cal2'))
         uid = str(uuid.uuid4().int)
+        tine_ = request.form.get('time')
+        print(tine_)
         # result1 = result.add_result(cal1, cal2)
         # print(result1)
         # print(result.rel1.sub_result(cal1, cal2))
         # use thread with raw sql
-        first_test(cal1, cal2)   
+           
         t = Test(first = cal1, second = cal2, uid = uid)
         db.session.add(t)
         db.session.commit() 
-        FirstTest(first=cal1, second=cal2, uid=uid )
-        # Get the memory usage of the current process
-    # memory_info = psutil.virtual_memory()
-
-    # print("Total Memory:", memory_info.total)
-    # print("Available Memory:", memory_info.available)
-    # print("Used Memory:", memory_info.used)
-    # print("Memory Usage Percentage:", memory_info.percent)
-    # Delete the id
+        # with current_app.app_context().push():
+        from main import app
+        # first_func(cal1, uid, Test, db,app, Stock)
+        FirstTest(app=app, uid=uid,num1=cal1, num2=cal2, endtime=tine_)
+            
     if request.method == 'POST' and 'uni_id' in request.form:
         uid_ = request.form.get('uni_id')
         print(uid_)
         t = Test.query.filter_by(uid = uid_).first()
         if 'delete' in request.form:
             db.session.delete(t)
+            
             db.session.commit()
         elif 'stop' in request.form:
             t.status = 'done'
@@ -55,6 +55,7 @@ def test():
     test = Test.query.all()
     data ={'test':test}
     return render_template('first.html', data= data)
+
 
 
 # @views.route('/',methods= ['GET', 'POST'])

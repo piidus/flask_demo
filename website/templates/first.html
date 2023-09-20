@@ -1,36 +1,51 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flask demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flask demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
     <h1>Hello, world!</h1>
     <form action="/home" method="post">
-        <!-- <div class="mb-3"> -->
-          <label for="exampleInputEmail1" class="form-label">FIND CALCULATION</label>
-          <input type="number" class="form-control" name="cal1" >
-          <input type="number" class="form-control" name="cal2" >
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        <!-- </div> -->
-        <button type="submit" class="btn btn-primary" name="calculated">Submit</button>
-      </form>
-    </div>
-    <table class="table">
-      {% for t in data.test %}
-      <tr>
+      <!-- <div class="mb-3"> -->
+      <label for="exampleInputEmail1" class="form-label">FIND CALCULATION</label>
+      <input type="number" class="form-control" name="cal1">
+      <input type="number" class="form-control" name="cal2">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      <!-- </div> -->
+      <!-- <button type="submit" class="btn btn-primary " name="calculated">Submit</button>
+    </form> -->
+  </div>
+  <div class="container">
+    <div class="form-outline w-50">
+      <label for="time">Time:</label>
+      <input type="time" class="form-control" id="time" name="time" min="09:00" max="23:00" step="1" />
+    
+  <button type="submit" class="btn btn-primary " name="calculated">Submit</button>
+    </form>
+  </div>
+</div>
+  <table class="table">
+    {% for t in data.test %}
+    <tr>
       <form action="/home" method="post">
-      <td width="10"><input name="uni_id" value="{{t.uid}}"></td>
-      <td>{{t.status}}</td>
-      <td><button type="submit" name="stop">Stop</button></td>
-      <td><button type="submit" name="delete">Del</button></td>
+        <td width="10"><input name="uni_id" value="{{t.uid}}"></td>
+        <td>{{t.status}}</td>
+        <td><button type="submit" name="stop">Stop</button></td>
+        <td><button type="submit" name="delete">Del</button></td>
     </tr>
     </form>
-      {% endfor %}
-    </table>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  </body>
+    {% endfor %}
+  </table>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

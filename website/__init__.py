@@ -12,7 +12,10 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    # Set the time zone to Asia/Kolkata
+    app.config['TIME_ZONE'] = 'Asia/Kolkata'
     db.init_app(app)
 
 
