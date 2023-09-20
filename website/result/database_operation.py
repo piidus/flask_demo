@@ -32,9 +32,16 @@ class FirstTest:
             print('it\'s a past time')
     def filter_status(self):
         with self.__app.app_context():
-            qu = Test.query.filter_by(uid = self.__uid).first()
-            if qu:
-                print(qu.status)
+            session = db.session()
+            # Fetch data using the session
+            fetched_data = session.query(Stock).filter_by(uid=self.__uid).first()
+        
+            # Close the session to release resources
+            session.close()
+            # qu = Test.query.filter_by(uid = self.__uid).first()
+            # db.session.refresh(qu)
+            if fetched_data:
+                print(fetched_data.status)
             else:
                 print('None')
     def first(self):
@@ -53,13 +60,24 @@ class FirstTest:
             threading.Timer(3, function=self.first).start()
         elif self.count == 5:
             with self.__app.app_context():
-                s = Stock.query.filter_by(uid = self.__uid).first()
+                stock = Stock()
+                s = stock.query.filter_by(uid = self.__uid).first()
                 s.status = 'done'
+                # db.session.commit()
+                print('commited')
                 db.session.commit()
+                # db.session.refresh(s)
+                
                 time.sleep(1)
-            threading.Timer(3, function=self.first).start()
+            threading.Timer(5, function=self.first).start()
+            
         else:
-            threading.Timer(3, function=self.filter_status).start()
+            # db.session.refresh(Test)
+            with self.__app.app_context():
+                qu = Test.query.filter_by(uid = self.__uid).first()
+                if qu:
+                    print(qu.status)
+            threading.Thread(target=self.filter_status).start()
             print('completed')
         self.count += 1
     def first_run(self):
