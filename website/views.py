@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, session, current_app
 from telebot import TeleBot
-from . import db
+from . import db, socketio
 import datetime
 import os, uuid
 # from .telebot import message
@@ -9,7 +9,7 @@ from .models import Test, Stock
 try:
     from memory_profiler import profile
     from website import result
-    from website.result import FirstTest, first_func
+    from website.result import FirstTest #first_func
     
     import psutil
 except Exception as e:
@@ -38,7 +38,7 @@ def test():
         db.session.commit() 
         # with current_app.app_context().push():
         from main import app
-        # first_func(cal1, uid, Test, db,app, Stock)
+    
         FirstTest(app=app, uid=uid,num1=cal1, num2=cal2, endtime=tine_)
             
     if request.method == 'POST' and 'uni_id' in request.form:
@@ -56,7 +56,17 @@ def test():
     data ={'test':test}
     return render_template('first.html', data= data)
 
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected!')
 
+# Define your Socket.IO events here
+# Example:
+@socketio.on('divisible_event')
+def handle_divisible_event(data):
+    print(f'Divisible event received with data: {data}')
+    # Broadcast the event to all connected clients
+    socketio.emit('divisible_response', {'message': 'A divisible number event occurred!'})
 
 # @views.route('/',methods= ['GET', 'POST'])
 # def home():

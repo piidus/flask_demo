@@ -2,10 +2,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
+from flask_socketio import SocketIO
 
 load_dotenv('.env')
 
-
+socketio = SocketIO()
 db = SQLAlchemy()
 DB_NAME = "database.db"
 def create_app():
@@ -17,7 +18,7 @@ def create_app():
     # Set the time zone to Asia/Kolkata
     app.config['TIME_ZONE'] = 'Asia/Kolkata'
     db.init_app(app)
-
+    socketio.init_app(app=app)
 
 
     from .views import views

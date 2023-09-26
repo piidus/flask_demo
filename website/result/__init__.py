@@ -1,4 +1,4 @@
-__all__ = ['add_result', 'sub_result',  'FirstTest', 'first_func']
+__all__ = ['add_result', 'sub_result',  'FirstTest']
 
 from .rel1 import add_result, sub_result
-from .database_operation import  FirstTest, first_func
+from .database_operation import  FirstTest

@@ -104,14 +104,14 @@ def test(cal1, uid, app, model, db1, model2):
                 print('database edited')
         except Exception as e:
             print(e, '------------here')
-def first_func(cal1, uid, model, db1, app, model2):
+# def first_func(cal1, uid, model, db1, app, model2):
     
-    with app.app_context():
-        m  = Stock(status = 'run', uid = uid, num = cal1)
-        db.session.add(m)
-        db.session.commit()
-        # print(current_app._get_exc_class_and_code)
-        # print(current_app._get_current_object())
-        t = threading.Thread(target=test, args=[cal1, uid, app,  model, db, model2]) 
-        t.start()
-        # current_app._get_current_object()
+#     with app.app_context():
+#         m  = Stock(status = 'run', uid = uid, num = cal1)
+#         db.session.add(m)
+#         db.session.commit()
+#         # print(current_app._get_exc_class_and_code)
+#         # print(current_app._get_current_object())
+#         t = threading.Thread(target=test, args=[cal1, uid, app,  model, db, model2]) 
+#         t.start()
+#         # current_app._get_current_object()
