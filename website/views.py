@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, session, current_app
 from telebot import TeleBot
-from . import db, socketio
+from . import db
 import datetime
 import os, uuid
 # from .telebot import message
