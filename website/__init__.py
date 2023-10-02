@@ -2,23 +2,27 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
-from flask_socketio import SocketIO
+# from flask_socketio import SocketIO
+from sqlalchemy import create_engine
+# engine = create_engine('mysql://piidusi1_piidusi1:C(6q3!b3JtCj9K@Python01/piidusi1_test', encoding='utf-8')
 
 load_dotenv('.env')
 
-socketio = SocketIO()
+# socketio = SocketIO()
 db = SQLAlchemy()
 DB_NAME = "database.db"
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://piidusi1_piidusi1:C(6q3!b3JtCj9K@103.185.74.60/piidusi1_test'
+    # 'mysql://username:password@remote_hostname/database_name'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     # Set the time zone to Asia/Kolkata
     app.config['TIME_ZONE'] = 'Asia/Kolkata'
     db.init_app(app)
-    socketio.init_app(app=app)
+    # socketio.init_app(app=app)
 
 
     from .views import views

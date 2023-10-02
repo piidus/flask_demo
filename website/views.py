@@ -7,18 +7,17 @@ import os, uuid
 # from .icici_login import api_login
 from .models import Test, Stock
 try:
-    from memory_profiler import profile
+    # from memory_profiler import profile
     from website import result
     from website.result import FirstTest #first_func
     
-    import psutil
+    # import psutil
 except Exception as e:
     print('Error in calculation  ::', e)
 views = Blueprint('views', __name__)
 
 
 
-@profile
 @views.route('/home', methods = ['POST', 'GET'])
 def test():
     # print('I am working')
@@ -56,17 +55,17 @@ def test():
     data ={'test':test}
     return render_template('first.html', data= data)
 
-@socketio.on('connect')
-def handle_connect():
-    print('Client connected!')
+# @socketio.on('connect')
+# def handle_connect():
+#     print('Client connected!')
 
-# Define your Socket.IO events here
-# Example:
-@socketio.on('divisible_event')
-def handle_divisible_event(data):
-    print(f'Divisible event received with data: {data}')
-    # Broadcast the event to all connected clients
-    socketio.emit('divisible_response', {'message': 'A divisible number event occurred!'})
+# # Define your Socket.IO events here
+# # Example:
+# @socketio.on('divisible_event')
+# def handle_divisible_event(data):
+#     print(f'Divisible event received with data: {data}')
+#     # Broadcast the event to all connected clients
+#     socketio.emit('divisible_response', {'message': 'A divisible number event occurred!'})
 
 # @views.route('/',methods= ['GET', 'POST'])
 # def home():
