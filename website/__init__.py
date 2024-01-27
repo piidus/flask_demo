@@ -18,8 +18,7 @@ def create_app():
     db_pass = os.getenv('DB_PASS')
     db_name = os.getenv('DB_NAME')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    # app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{db_user}:{db_pass}@103.185.74.60:3306/{db_name}'
-    # 'mysql://username:password@remote_hostname/database_name'
+    
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     
     # Set the time zone to Asia/Kolkata
