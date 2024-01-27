@@ -18,7 +18,7 @@ views = Blueprint('views', __name__)
 
 
 
-@views.route('/home', methods = ['POST', 'GET'])
+@views.route('/', methods = ['POST', 'GET'])
 def test():
     # print('I am working')
     if request.method == 'POST' and 'calculated' in request.form:
